@@ -1,4 +1,6 @@
-WSapi
+WS api Documentation
 =====
+Veikiantis kodas example.php faile
 
-WS api repo
+Dukomentacija http://ws.kotrynagroup.com/web/api/doc
+
