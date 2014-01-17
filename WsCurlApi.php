@@ -48,14 +48,15 @@ class WsCurlApi {
 
     public function __construct()
     {
-        $this->format = 'josn';
+        //det dafault values
+        $this->format = 'json'; 
         $this->method = 'GET';
     }
 
     /**
      * Call curl url
      *
-     * @param $url
+     * @param string $url - url from documentation http://ws.kotrynagroup.com/web/api/doc
      * @param array $postData
      * @return mixed
      */
@@ -64,7 +65,7 @@ class WsCurlApi {
         $fullUrl = $this->apiUrl . $url;
 
         // set format automatically from url
-        $this->setFormatFormUrl($url);
+        $this->setFormatFromUrl($url);
 
         $ch = curl_init($fullUrl);
 
@@ -115,7 +116,7 @@ class WsCurlApi {
      *
      * @param $url
      */
-    public function setFormatFormUrl($url)
+    public function setFormatFromUrl($url)
     {
         $this->format = 'json';
 
