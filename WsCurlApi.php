@@ -48,7 +48,7 @@ class WsCurlApi {
 
     public function __construct()
     {
-        //det dafault values
+        //set default values
         $this->format = 'json'; 
         $this->method = 'GET';
     }
