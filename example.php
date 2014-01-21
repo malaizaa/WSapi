@@ -16,8 +16,11 @@ $wsApi->setApiUrl($config['apiUrl']);
 // metodas gauti visus likucius json formatu
 //$result = $wsApi->call('api/getStocks.json');
 
-// metodas gauti vieno produkto likuti
-//$result = $wsApi->call('api/getStock.json?axaptaId=1010101-0042');
+$postData =  array(
+    'axaptaId' => '1010101-0042',
+);
+// metodas gauti vieno produkto likuti. Curl metodas turi buti GET
+//$result = $wsApi->call('api/getStock.json', $postData);
 
 // metodas sukurti nauja uzsakyma
 $postData =  array(
@@ -34,4 +37,18 @@ $postData =  array(
 );
 
 $wsApi->setMethod('POST');
-$result = $wsApi->call('api/order/new', $postData);
+//$result = $wsApi->call('api/order/new', $postData);
+
+// metodas gauti visa assortimenta, Pasiekamas tik vidiniams retaileriams
+$postData =  array(
+    'division' => '101',
+    'timeLine' => '-100days'
+);
+
+$wsApi->setMethod('GET');
+
+header ("Content-Type:text/xml");
+
+$result = $wsApi->call('api/getOurRetailerProducts.xml', $postData);
+
+echo $result;

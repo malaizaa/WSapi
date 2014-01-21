@@ -66,13 +66,17 @@ class WsCurlApi {
         // set format automatically from url
         $this->setFormatFormUrl($url);
 
+        if (!empty($postData) && $this->method == 'GET') {
+            $fullUrl .= '?' . http_build_query($postData);
+        }
+
         $ch = curl_init($fullUrl);
 
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->prepareCurlHeaders());
 
-        if (!empty($postData)) {
+        if (!empty($postData) && $this->method == 'POST') {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData) );
         }
 
