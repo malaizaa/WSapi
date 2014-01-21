@@ -46,9 +46,15 @@ $postData =  array(
 );
 
 $wsApi->setMethod('GET');
-
-header ("Content-Type:text/xml");
-
 $result = $wsApi->call('api/getOurRetailerProducts.xml', $postData);
+
+// metodas gauti visus likucius, Pasiekamas tik vidiniams retaileriams
+$postData =  array(
+    'timeLine' => '-2days'
+);
+
+$wsApi->setMethod('GET');
+$result = $wsApi->call('api/getOurRetailerProductQuantities.xml', $postData);
+header ("Content-Type:text/xml");
 
 echo $result;
